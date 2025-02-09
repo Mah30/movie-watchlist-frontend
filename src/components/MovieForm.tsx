@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { addMovie } from "../services/movieService";
 
+
+
 const MovieForm = ({ onMovieAdded }: { onMovieAdded: () => void }) => {
   const [title, setTitle] = useState("");
   const [genre, setGenre] = useState("");

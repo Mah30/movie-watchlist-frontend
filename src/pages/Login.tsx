@@ -7,45 +7,44 @@ import { authService } from "../services/authService";
 import { SessionContext } from "../SessionContext/SessionContext";
 
 export function Login(): JSX.Element {
-  // 📌 Estados para armazenar email, senha e mensagens
+  
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string>("");
   const [success, setSuccess] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  // 📌 Contexto da sessão do usuário
+ 
   const session = useContext(SessionContext);
   
-  // 📌 Navegação entre páginas
+
   const navigate = useNavigate();
 
-  // 📌 Garante que o contexto está disponível antes de usar
+
   if (!session) {
     return <h2>Loading...</h2>;
   }
 
-  // 📌 Obtém `setToken` do contexto para atualizar o estado global após login
+  //  Obtém `setToken` do contexto para atualizar o estado global após login
   const { setToken } = session;
 
-  // 📌 Manipula o envio do formulário de login
+  
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
-    setError(""); // Reseta erros anteriores
-    setSuccess(""); // Reseta mensagens anteriores
+    setError(""); 
+    setSuccess(""); 
 
     try {
-      // 📌 Agora estamos usando `authService.login()`
       const responseData = await authService.login(email, password);
 
-      // 📌 Salva o token no contexto de sessão
+      // Salva o token no contexto de sessão
       setToken(responseData.token);
 
-      // 📌 Exibe mensagem de sucesso
+  
       setSuccess("Login successful! Redirecting...");
 
-      // 📌 Redireciona o usuário após um pequeno delay
+    
       setTimeout(() => navigate("/profile"), 1500);
 
     } catch (error) {
@@ -61,11 +60,11 @@ export function Login(): JSX.Element {
       <Card className="w-full max-w-sm md:max-w-md lg:max-w-lg p-8 shadow-lg">
         <h3 className="text-center font-bold text-xl mb-4 text-gray-800">Log In</h3>
 
-        {/* 📌 Exibe mensagens de erro/sucesso */}
+       
         {error && <Alert color="failure">{error}</Alert>}
         {success && <Alert color="success">{success}</Alert>}
 
-        {/* 📌 Formulário de Login */}
+        {/* Formulário de Login */}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <Label htmlFor="email" value="Email" />
