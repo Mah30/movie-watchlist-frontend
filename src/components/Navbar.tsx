@@ -13,7 +13,7 @@ const Navbar = () => {
         
         {/* Logo */}
         <Link to="/" className="flex items-center space-x-3 rtl:space-x-reverse">
-          <img src= "/public/logo.jpg" className="h-8" alt="Logo" />
+          <img src= "/logo.jpg" className="h-8" alt="Logo" />
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
             Movie Watchlist
           </span>
