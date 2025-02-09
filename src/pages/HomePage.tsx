@@ -53,21 +53,21 @@ const HomePage = () => {
 
       {/* Filtro por status */}
       <div className="mb-4">
-        <label className="mr-2 font-semibold">Filtrar por:</label>
+        <label className="mr-2 font-semibold">Filter por:</label>
         <select
           value={filter}
           onChange={(e) => setFilter(e.target.value as "All" | "To Watch" | "Watched")}
           className="border p-2 rounded"
         >
           <option value="All">Todos</option>
-          <option value="To Watch">Para Assistir</option>
-          <option value="Watched">Assistidos</option>
+          <option value="To Watch">To Watch</option>
+          <option value="Watched">Watched</option>
         </select>
       </div>
 
       <ul className="mt-4">
         {movies.length === 0 ? (
-          <p>Nenhum filme encontrado.</p>
+          <p>No movie found</p>
         ) : (
           movies.map((movie) => (
             <li key={movie.id} className="flex justify-between items-center p-2 border-b">
@@ -91,3 +91,11 @@ const HomePage = () => {
 };
 
 export default HomePage;
+
+{/* <ul>
+        {movies.map((movie) => (
+          <li key={movie.id} className="mt-2 p-2 bg-gray-100 rounded">
+            {movie.title} - {movie.watched ? "Watched" : "To Watch"}
+          </li>
+        ))}
+      </ul> */}

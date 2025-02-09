@@ -15,6 +15,7 @@ function App() {
       <div>
       <Navbar />
       <Routes>
+        {/* Rota Protegida */}
         <Route path="/" element={authService.isAuthenticated() ? <HomePage /> : <Navigate to="/login" />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
