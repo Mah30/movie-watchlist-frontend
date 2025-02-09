@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { authService } from "../services/auth";
+import { authService } from "../services/authService";
 import { useState } from "react";
 
 

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { authService } from "./auth";
+import { authService } from "./authService";
 
 const api = axios.create({
   baseURL: "http://localhost:5005/api", // Ajuste para o endereço do backend
@@ -12,6 +12,11 @@ const api = axios.create({
 api.interceptors.request.use(
   (config) => {
     const token = authService.getToken();
+
+    config.headers = config.headers || {};
+
+
+
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }

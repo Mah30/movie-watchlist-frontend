@@ -1,11 +1,11 @@
 /* import { DarkThemeToggle } from "flowbite-react"; */
 import { Routes, Route, Navigate } from "react-router-dom";
 import HomePage from "./pages/HomePage";
-import Login from "./pages/Login";
+import {Login} from "./pages/Login";
 import Signup from "./pages/Signup";
 import Profile from "./pages/Profile";
 import Navbar from "../src/components/Navbar";
-import { authService } from "./services/auth";
+import { authService } from "./services/authService";
 
 function App() {
   return (

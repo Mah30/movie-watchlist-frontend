@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { movieService } from "../services/movieService";
-import { authService } from "../services/auth"; // Para obter o token do usuário
+import { authService } from "../services/authService"; // Para obter o token do usuário
 
 interface Movie {
   id: number;
