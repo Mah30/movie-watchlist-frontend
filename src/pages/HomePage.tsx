@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getMovies, deleteMovie } from "../services/movieService";
 
 interface Movie {
@@ -9,7 +9,7 @@ interface Movie {
   rating?: number;
 }
 
-const HomePage = () => {
+const Home = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
 
   useEffect(() => {
@@ -27,12 +27,12 @@ const HomePage = () => {
 
   return (
     <div>
-      <h1>🎬 My List of Films </h1>
+      <h1>🎬 My Movie List</h1>
       <ul>
         {movies.map((movie) => (
           <li key={movie.id}>
             <strong>{movie.title}</strong> - {movie.genre} - {movie.status}
-            <button onClick={() => handleDelete(movie.id)}>🗑️ Excluir</button>
+            <button onClick={() => handleDelete(movie.id)}>🗑️ Delete</button>
           </li>
         ))}
       </ul>
@@ -40,4 +40,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default Home;
