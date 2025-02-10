@@ -38,10 +38,7 @@ export function Signup(): JSX.Element {
 
     try {
       // Calls signup API
-      const responseData = await authService.signup(firstName, lastName, email, password);
-
-      // Save the token in the session context
-      setToken(responseData.token);
+      await authService.signup(firstName, lastName, email, password);
 
       setSuccess("Account created successfully! Redirecting...");
 

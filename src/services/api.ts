@@ -1,9 +1,10 @@
 import axios from "axios";
 import { authService } from "./authService";
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const api = axios.create({
-  baseURL: "http://localhost:5005/api", // Ajuste para o endereço do backend
+  baseURL: `${API_BASE_URL}/api`, // Ajuste para o endereço do backend
   headers: {
     "Content-Type": "application/json",
   },

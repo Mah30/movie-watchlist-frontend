@@ -3,7 +3,7 @@ import { SessionContext } from "../SessionContext/SessionContext";
 import { Navigate } from "react-router-dom";
 
 interface AnonymousRouteProps {
-  children: React.ReactNode; // 📌 Define que `children` pode receber qualquer elemento React
+  children: React.ReactNode; // Define que `children` pode receber qualquer elemento React
 }
 
 const AnonymousRoute = ({ children }: AnonymousRouteProps): JSX.Element => {

@@ -11,7 +11,8 @@ import { authService } from "./services/authService";
 import AboutPage from "./pages/AboutPage";
 import HomePage from "./pages/HomePage";
 import AnonymousRoute from "./routes/AnonymousRoute";
-import PrivateRoute from "./routes/PrivateRoute";
+/* import PrivateRoute from "./routes/PrivateRoute";
+import MovieForm from "./components/MovieForm"; */
 
 
 function App() {
@@ -42,6 +43,9 @@ function App() {
        {/*  <Route path="/browse" element={authService.isAuthenticated() ? <Browse /> : <Navigate to="/login" />} /> */} {/* Botar esse código dentro de browse */}
 
 
+     {/*   <Route path="/addmovie" element={<MovieForm />} />  */}
+
+
 
         <Route path="/browse" element={<Browse />} /> {/* <PrivateRoute><Browse /></PrivateRoute> */}
 
@@ -57,7 +61,7 @@ function App() {
         {/* <Route path="/profile" element={<PrivateRoute><ProfilePage /></PrivateRoute>} /> */}
 
 
-        {/* 📌 Redireciona qualquer rota não encontrada para Home */}
+        {/* Redireciona qualquer rota não encontrada para Home */}
         <Route path="*" element={<Navigate to="/" />} />
 
 
