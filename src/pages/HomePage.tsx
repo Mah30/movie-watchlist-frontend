@@ -1,13 +1,13 @@
 
 
-const AboutPage = () => {
+const HomePage = () => {
     return ( 
         <div>
             <h1>
-                About
+                Home Page
             </h1>
         </div>
      );
 }
  
-export default AboutPage;
+export default HomePage;

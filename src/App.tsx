@@ -8,9 +8,11 @@ import {Signup} from "./pages/Signup";
 import Profile from "./pages/Profile";
 import Navbar from "../src/components/Navbar";
 import { authService } from "./services/authService";
-import AnonymousRoute from "./routes/AnonymousRoute";
 import AboutPage from "./pages/AboutPage";
+import HomePage from "./pages/HomePage";
+import AnonymousRoute from "./routes/AnonymousRoute";
 import PrivateRoute from "./routes/PrivateRoute";
+
 
 function App() {
 
@@ -20,25 +22,28 @@ function App() {
     return <h2>Loading...</h2>; 
   }
 
-  const { isAuthenticated } = session;
-
   return (
     <main>
   
-      <div>
+      <div className="pt-20">
       <Navbar />
 
       <Routes>
         
         {/* Rotas públicas */}
         
+        <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} /> 
 
 
         {/* Rota Protegida - apenas usuários logados podem acessar */}
-        <Route path="/browse" element={authService.isAuthenticated() ? <Browse /> : <Navigate to="/login" />} />
+        
+        {/* <Route path="/browse" element={<Browse /> } /> */}
+       {/*  <Route path="/browse" element={authService.isAuthenticated() ? <Browse /> : <Navigate to="/login" />} /> */} {/* Botar esse código dentro de browse */}
 
-        <Route path="/browse" element={<PrivateRoute><Browse /></PrivateRoute>} />
+
+
+        <Route path="/browse" element={<Browse />} /> {/* <PrivateRoute><Browse /></PrivateRoute> */}
 
 
 
@@ -48,7 +53,7 @@ function App() {
 
         {/* Rotas protegidas */}
 
-        <Route path="/profile" element={authService.isAuthenticated() ? <Profile /> : <Navigate to="/login" />} />
+        <Route path="/profile" element={authService.isAuthenticated() ? <Profile /> : <Navigate to="/login" />}  />
         {/* <Route path="/profile" element={<PrivateRoute><ProfilePage /></PrivateRoute>} /> */}
 
 
