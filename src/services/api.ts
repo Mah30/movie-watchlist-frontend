@@ -1,6 +1,7 @@
 import axios from "axios";
 import { authService } from "./authService";
 
+
 const api = axios.create({
   baseURL: "http://localhost:5005/api", // Ajuste para o endereço do backend
   headers: {
