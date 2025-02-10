@@ -1,4 +1,4 @@
-import api from "./api";
+/* import api from "./api"; */
 
 interface AuthResponse {
   token: string;
@@ -6,25 +6,33 @@ interface AuthResponse {
 
 export const authService = {
   login: async (email: string, password: string): Promise<AuthResponse> => {
-    try {
-      const response = await api.post<AuthResponse>("/auth/login", { email, password });
-      const { token } = response.data;
-      localStorage.setItem("token", token);
-      return response.data;
-    } catch (error) {
-      console.error("Login failed:", error);
-      throw error;
+    const response = await fetch("http://localhost:5005/api/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
+  
+    if (!response.ok) {
+      throw new Error("Login failed. Please check your credentials.");
     }
+  
+    const responseData = await response.json();
+    localStorage.setItem("token", responseData.token);
+    return responseData;
   },
 
-  signup: async (email: string, password: string) => {
-    try {
-      const response = await api.post("/auth/signup", { email, password });
-      return response.data;
-    } catch (error) {
-      console.error("Signup failed:", error);
-      throw error;
+  signup: async (firstName: string, lastName: string, email: string, password: string) => {
+    const response = await fetch("http://localhost:5005/api/auth/signup", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ firstName, lastName, email, password }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Signup failed. Please check your details.");
     }
+
+    return await response.json(); // Returns token and user data
   },
 
   logout: () => {
