@@ -2,14 +2,14 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import {Login} from "./pages/Login";
-import Signup from "./pages/Signup";
+import {Signup} from "./pages/Signup";
 import Profile from "./pages/Profile";
 import Navbar from "../src/components/Navbar";
 import { authService } from "./services/authService";
 
 function App() {
   return (
-    <main className="flex min-h-screen items-center justify-center gap-2 dark:bg-gray-800">
+    <main /* className="flex min-h-screen items-center justify-center gap-2 dark:bg-gray-800" */>
      {/*  <h1 className="text-2xl dark:text-white">White/dark</h1> */}
       {/* <DarkThemeToggle /> */}
       <div>

@@ -6,6 +6,8 @@ import { Spinner, Button, Card, TextInput, Label, Alert } from "flowbite-react";
 import { authService } from "../services/authService";
 import { SessionContext } from "../SessionContext/SessionContext";
 
+
+
 export function Login(): JSX.Element {
   
   const [email, setEmail] = useState<string>("");
