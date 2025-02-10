@@ -1,25 +1,61 @@
-/* import { DarkThemeToggle } from "flowbite-react"; */
+
 import { Routes, Route, Navigate } from "react-router-dom";
-import HomePage from "./pages/HomePage";
+import { useContext } from "react";
+import { SessionContext } from "./SessionContext/SessionContext";
+import Browse from "./pages/Browse";
 import {Login} from "./pages/Login";
 import {Signup} from "./pages/Signup";
 import Profile from "./pages/Profile";
 import Navbar from "../src/components/Navbar";
 import { authService } from "./services/authService";
+import AnonymousRoute from "./routes/AnonymousRoute";
+import AboutPage from "./pages/AboutPage";
+import PrivateRoute from "./routes/PrivateRoute";
 
 function App() {
+
+  const session = useContext(SessionContext);
+
+  if (!session) {
+    return <h2>Loading...</h2>; 
+  }
+
+  const { isAuthenticated } = session;
+
   return (
-    <main /* className="flex min-h-screen items-center justify-center gap-2 dark:bg-gray-800" */>
-     {/*  <h1 className="text-2xl dark:text-white">White/dark</h1> */}
-      {/* <DarkThemeToggle /> */}
+    <main>
+  
       <div>
       <Navbar />
+
       <Routes>
-        {/* Rota Protegida */}
-        <Route path="/" element={authService.isAuthenticated() ? <HomePage /> : <Navigate to="/login" />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
+        
+        {/* Rotas públicas */}
+        
+        <Route path="/about" element={<AboutPage />} /> 
+
+
+        {/* Rota Protegida - apenas usuários logados podem acessar */}
+        <Route path="/browse" element={authService.isAuthenticated() ? <Browse /> : <Navigate to="/login" />} />
+
+        <Route path="/browse" element={<PrivateRoute><Browse /></PrivateRoute>} />
+
+
+
+        <Route path="/login" element={<AnonymousRoute><Login /></AnonymousRoute>} />
+        <Route path="/signup" element={<AnonymousRoute><Signup /></AnonymousRoute>} />
+
+
+        {/* Rotas protegidas */}
+
         <Route path="/profile" element={authService.isAuthenticated() ? <Profile /> : <Navigate to="/login" />} />
+        {/* <Route path="/profile" element={<PrivateRoute><ProfilePage /></PrivateRoute>} /> */}
+
+
+        {/* 📌 Redireciona qualquer rota não encontrada para Home */}
+        <Route path="*" element={<Navigate to="/" />} />
+
+
       </Routes>
     </div>
 

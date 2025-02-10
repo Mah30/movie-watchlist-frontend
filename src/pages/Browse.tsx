@@ -11,7 +11,7 @@ interface Movie {
   userId: number;
 }
 
-const HomePage = () => {
+const Browse = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [filter, setFilter] = useState<"All" | "To Watch" | "Watched">("All");
 
@@ -90,7 +90,7 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default Browse;
 
 {/* <ul>
         {movies.map((movie) => (

@@ -1,4 +1,5 @@
 import api from "./api";
+import { movieStatusService } from "./movieStatusService";
 
 interface Movie {
   id: number;
