@@ -26,9 +26,6 @@ export function Signup(): JSX.Element {
     return <h2>Loading...</h2>;
   }
 
-  //`setToken` from session context
-  const { setToken } = session;
-
   // Handles form submission
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

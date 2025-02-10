@@ -14,7 +14,7 @@ export const movieService = {
   // Obtém todos os filmes
   getMovies: async (): Promise<Movie[]> => {
     try {
-      const response = await api.get("/movies");
+      const response = await api.get<Array<Movie>>("/movies");
        return response.data;
     } catch (error) {
       console.error("Error retrieving movies:", error);
@@ -25,7 +25,7 @@ export const movieService = {
   // Obtém um filme pelo ID
   getMovieById: async (movieId: number): Promise<Movie | null> => {
     try {
-      const response = await api.get(`/movies/${movieId}`);
+      const response = await api.get<Movie>(`/movies/${movieId}`);
       return response.data;
     } catch (error) {
       console.error("Error retrieving movie by ID:", error);
@@ -36,7 +36,7 @@ export const movieService = {
   // Obtém filmes filtrados por status ("To Watch" ou "Watched")
   getMoviesByStatus: async (status: "To Watch" | "Watched"): Promise<Movie[]> => {
     try {
-      const response = await api.get(`/movies/status/${status}`);
+      const response = await api.get<Array<Movie>>(`/movies/status/${status}`);
       return response.data;
     } catch (error) {
       console.error("Error retrieving movies by status:", error);
@@ -45,7 +45,7 @@ export const movieService = {
   },
 
   // Adiciona um novo filme (precisa de autenticação)
-  addMovie: async (movie: Movie, token: string) => {
+  addMovie: async (movie: Omit<Movie, "id">, token: string) => {
     try {
       const response = await api.post("/movies", movie, {
         headers: { Authorization: `Bearer ${token}` },
