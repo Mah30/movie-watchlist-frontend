@@ -1,7 +1,4 @@
-
-
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-
 
 interface AuthResponse {
   token: string;
@@ -14,17 +11,22 @@ export const authService = {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
     });
-  
+
     if (!response.ok) {
       throw new Error("Login failed. Please check your credentials.");
     }
-  
+
     const responseData = await response.json();
     localStorage.setItem("token", responseData.token);
     return responseData;
   },
 
-  signup: async (firstName: string, lastName: string, email: string, password: string) => {
+  signup: async (
+    firstName: string,
+    lastName: string,
+    email: string,
+    password: string,
+  ) => {
     const response = await fetch(`${API_BASE_URL}/auth/signup`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },

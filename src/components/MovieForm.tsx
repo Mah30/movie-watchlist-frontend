@@ -3,9 +3,6 @@ import { movieService } from "../services/movieService";
 /* import { movieStatusService } from "../services/movieStatusService"; */
 import { SessionContext } from "../SessionContext/SessionContext";
 
-
-
-
 const MovieForm = ({ onMovieAdded }: { onMovieAdded: () => void }) => {
   const [title, setTitle] = useState("");
   const [genre, setGenre] = useState("");
@@ -15,7 +12,7 @@ const MovieForm = ({ onMovieAdded }: { onMovieAdded: () => void }) => {
   const token = session?.token;
 
   if (!token) {
-    return <h2>Loading...</h2>; 
+    return <h2>Loading...</h2>;
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -28,9 +25,24 @@ const MovieForm = ({ onMovieAdded }: { onMovieAdded: () => void }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input type="text" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} required />
-      <input type="text" placeholder="Genre" value={genre} onChange={(e) => setGenre(e.target.value)} required />
-      <select value={status} onChange={(e) => setStatus(e.target.value as "To Watch" | "Watched")}>
+      <input
+        type="text"
+        placeholder="Title"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        required
+      />
+      <input
+        type="text"
+        placeholder="Genre"
+        value={genre}
+        onChange={(e) => setGenre(e.target.value)}
+        required
+      />
+      <select
+        value={status}
+        onChange={(e) => setStatus(e.target.value as "To Watch" | "Watched")}
+      >
         <option value="To Watch">To Watch</option>
         <option value="Watched">Watched</option>
       </select>
@@ -40,9 +52,6 @@ const MovieForm = ({ onMovieAdded }: { onMovieAdded: () => void }) => {
 };
 
 export default MovieForm;
- 
-
-
 
 /* import { useState } from "react";
 import { movieService } from "../services/movieService";

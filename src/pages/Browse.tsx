@@ -56,8 +56,10 @@ const Browse = () => {
         <label className="mr-2 font-semibold">Filter por:</label>
         <select
           value={filter}
-          onChange={(e) => setFilter(e.target.value as "All" | "To Watch" | "Watched")}
-          className="border p-2 rounded"
+          onChange={(e) =>
+            setFilter(e.target.value as "All" | "To Watch" | "Watched")
+          }
+          className="rounded border p-2"
         >
           <option value="All">Todos</option>
           <option value="To Watch">To Watch</option>
@@ -70,14 +72,17 @@ const Browse = () => {
           <p>No movie found</p>
         ) : (
           movies.map((movie) => (
-            <li key={movie.id} className="flex justify-between items-center p-2 border-b">
+            <li
+              key={movie.id}
+              className="flex items-center justify-between border-b p-2"
+            >
               <div>
                 <strong>{movie.title}</strong> - {movie.genre} - {movie.status}
               </div>
               {token && (
                 <button
                   onClick={() => handleDelete(movie.id)}
-                  className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-700"
+                  className="rounded bg-red-500 px-2 py-1 text-white hover:bg-red-700"
                 >
                   🗑️ Delete
                 </button>
@@ -92,10 +97,12 @@ const Browse = () => {
 
 export default Browse;
 
-{/* <ul>
+{
+  /* <ul>
         {movies.map((movie) => (
           <li key={movie.id} className="mt-2 p-2 bg-gray-100 rounded">
             {movie.title} - {movie.watched ? "Watched" : "To Watch"}
           </li>
         ))}
-      </ul> */}
+      </ul> */
+}

@@ -19,7 +19,7 @@ const MovieCard = ({ movie, onStatusUpdated }: MovieCardProps) => {
   const session = useContext(SessionContext);
 
   if (!session) {
-    return <h2>Loading...</h2>; 
+    return <h2>Loading...</h2>;
   }
 
   const { token } = session; // aponta existencia do `token`

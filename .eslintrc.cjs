@@ -10,7 +10,7 @@ module.exports = {
   ],
   ignorePatterns: ["dist", ".eslintrc.cjs"],
   parser: "@typescript-eslint/parser",
-  plugins: ["react-refresh"],
+  plugins: ["react-refresh", require("prettier-plugin-tailwindcss")],
   settings: {
     tailwindcss: {
       callees: ["twMerge", "createTheme"],
@@ -18,6 +18,7 @@ module.exports = {
     },
   },
   rules: {
+    /*  "tailwindcss/classnames-order": "off", */
     "react-refresh/only-export-components": [
       "warn",
       { allowConstantExport: true },

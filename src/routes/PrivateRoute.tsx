@@ -3,11 +3,10 @@ import { SessionContext } from "../SessionContext/SessionContext";
 import { Navigate } from "react-router-dom";
 
 interface PrivateRouteProps {
-  children: React.ReactNode; // 
+  children: React.ReactNode; //
 }
 
 const PrivateRoute = ({ children }: PrivateRouteProps): JSX.Element => {
- 
   const session = useContext(SessionContext);
 
   if (!session) {
@@ -21,7 +20,7 @@ const PrivateRoute = ({ children }: PrivateRouteProps): JSX.Element => {
   }
 
   if (!isAuthenticated) {
-    return <Navigate to='/login' replace />;
+    return <Navigate to="/login" replace />;
   }
 
   // Se o usuário não estiver autenticado, renderiza os componentes filhos normalmente
@@ -29,8 +28,6 @@ const PrivateRoute = ({ children }: PrivateRouteProps): JSX.Element => {
 };
 
 export default PrivateRoute;
-
-
 
 /* const PrivateRoute = ({ children }) => {
     const { isAuthenticated, isLoading } = useContext(SessionContext)

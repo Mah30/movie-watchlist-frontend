@@ -7,7 +7,6 @@ interface AnonymousRouteProps {
 }
 
 const AnonymousRoute = ({ children }: AnonymousRouteProps): JSX.Element => {
- 
   const session = useContext(SessionContext);
 
   if (!session) {
