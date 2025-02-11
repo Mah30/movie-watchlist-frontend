@@ -10,13 +10,14 @@ import { authService } from "./services/authService";
 import AboutPage from "./pages/AboutPage";
 import HomePage from "./pages/HomePage";
 import AnonymousRoute from "./routes/AnonymousRoute";
+
 /* import PrivateRoute from "./routes/PrivateRoute";
 import MovieForm from "./components/MovieForm"; */
 
 function App() {
   const session = useContext(SessionContext);
 
-  if (!session) {
+  if (!session || session.isLoading) {
     return <h2>Loading...</h2>;
   }
 

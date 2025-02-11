@@ -80,6 +80,8 @@ const Navbar = () => {
           id="navbar-sticky"
         >
           <ul className="mt-4 flex flex-col rounded-lg border border-gray-100 bg-gray-50 p-4 font-medium dark:border-gray-700 dark:bg-gray-800 md:mt-0 md:flex-row md:space-x-8 md:border-0 md:bg-white md:p-0 md:dark:bg-gray-900 rtl:space-x-reverse">
+
+          {authService.isAuthenticated() && (
             <li>
               <Link
                 to="/browse"
@@ -89,6 +91,8 @@ const Navbar = () => {
                 My Movie List
               </Link>
             </li>
+          )}
+
             {authService.isAuthenticated() && (
               <li>
                 <Link

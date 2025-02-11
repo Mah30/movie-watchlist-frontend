@@ -53,7 +53,7 @@ const Browse = () => {
 
       {/* Filtro por status */}
       <div className="mb-4">
-        <label className="mr-2 font-semibold">Filter por:</label>
+        <label className="mr-2 font-semibold">Filtered by:</label>
         <select
           value={filter}
           onChange={(e) =>
@@ -61,7 +61,7 @@ const Browse = () => {
           }
           className="rounded border p-2"
         >
-          <option value="All">Todos</option>
+          <option value="All">All</option>
           <option value="To Watch">To Watch</option>
           <option value="Watched">Watched</option>
         </select>
