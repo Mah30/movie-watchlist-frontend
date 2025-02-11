@@ -95,3 +95,21 @@ const Movies = ({ isHomepage, isUserSpace, MovieDetails }: MoviesProps) => {
 };
 
 export default Movies; */
+
+
+//cards de filmes com botões "Add to Watchlist" e "Mark as Watched".
+
+/* import { Button } from "flowbite-react";
+
+const MovieCard = ({ movie, onStatusChange }) => {
+  return (
+    <div className="card">
+      <h2>{movie.title}</h2>
+      <p>{movie.description}</p>
+      <Button onClick={() => onStatusChange(movie.id, "to watch")}>Add to Watchlist</Button>
+      <Button onClick={() => onStatusChange(movie.id, "watched")}>Mark as Watched</Button>
+    </div>
+  );
+};
+
+export default MovieCard; */

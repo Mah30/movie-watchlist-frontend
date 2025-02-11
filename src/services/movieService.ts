@@ -63,9 +63,9 @@ export const movieService = {
     movieId: number,
     movie: Partial<Movie>,
     token: string,
-  ) => {
+  ): Promise<Movie | undefined> => {
     try {
-      const response = await api.put(`/movies/${movieId}`, movie, {
+      const response = await api.put<Movie>(`/movies/${movieId}`, movie, {
         headers: { Authorization: `Bearer ${token}` },
       });
       return response.data;

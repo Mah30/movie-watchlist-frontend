@@ -11,7 +11,7 @@ interface SessionContextType {
   logout: () => void;
 }
 
-export const SessionContext = createContext<SessionContextType | undefined>(undefined);
+export const SessionContext = createContext<SessionContextType | /* undefined>(undefined) */ null>(null);
 
 // Define as `props` do `SessionContextProvider`
 interface SessionContextProviderProps {
@@ -71,7 +71,7 @@ const SessionContextProvider = ({ children }: SessionContextProviderProps): JSX.
     }
   }, [token]);
 
-  
+
 
   // Função de logout
   const logout = (): void => {
