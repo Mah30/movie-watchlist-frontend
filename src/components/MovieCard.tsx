@@ -1,17 +1,21 @@
 import { useContext } from "react";
-import { movieStatusService } from "../services/movieStatusService";
-import { SessionContext } from "../SessionContext/SessionContext";
+import { SessionContext } from "../../src/SessionContext/SessionContext";
+import { userMovieService } from "../../src/services/userMovieService";
 
-interface Movie {
+interface UserMovie {
   id: number;
-  title: string;
-  genre: string;
+  movieId: number;
   status: "To Watch" | "Watched";
-  userId: number;
+  rating?: number;
+  movie: {
+    id: number;
+    title: string;
+    genre: string;
+  };
 }
 
 interface MovieCardProps {
-  movie: Movie;
+  movie: UserMovie; 
   onStatusUpdated: () => void;
 }
 
@@ -22,7 +26,7 @@ const MovieCard = ({ movie, onStatusUpdated }: MovieCardProps) => {
     return <h2>Loading...</h2>;
   }
 
-  const { token } = session; // aponta existencia do `token`
+  const { token } = session; // aponta existência do `token`
 
   const handleToggleStatus = async () => {
     if (!token) {
@@ -31,7 +35,7 @@ const MovieCard = ({ movie, onStatusUpdated }: MovieCardProps) => {
     }
 
     try {
-      await movieStatusService.toggleMovieStatus(movie.id, movie.status, token);
+      await userMovieService.updateMovieStatus(movie.movieId, movie.status, token);
       onStatusUpdated(); // Atualiza a UI após a mudança
     } catch (error) {
       console.error("Failed to update movie status:", error);
@@ -40,8 +44,8 @@ const MovieCard = ({ movie, onStatusUpdated }: MovieCardProps) => {
 
   return (
     <div className="movie-card">
-      <h3>{movie.title}</h3>
-      <p>{movie.genre}</p>
+      <h3>{movie.movie.title}</h3>
+      <p>{movie.movie.genre}</p>
       <p>Status: {movie.status}</p>
       <button onClick={handleToggleStatus}>
         {movie.status === "To Watch" ? "Mark as Watched" : "Mark as To Watch"}

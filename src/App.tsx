@@ -11,6 +11,7 @@ import AboutPage from "./pages/AboutPage";
 import HomePage from "./pages/HomePage";
 import AnonymousRoute from "./routes/AnonymousRoute";
 
+
 /* import PrivateRoute from "./routes/PrivateRoute";
 import MovieForm from "./components/MovieForm"; */
 
