@@ -1,14 +1,13 @@
 import api from "./api";
-import { movieStatusService } from "./movieStatusService";
+/* import { movieStatusService } from "./movieStatusService"; */
 
 interface Movie {
   id: number;
   title: string;
   genre: string;
-  status: "To Watch" | "Watched";
-  rating?: number;
-  userId: number;
+
 }
+
 
 export const movieService = {
   // Obtém todos os filmes
@@ -22,7 +21,8 @@ export const movieService = {
     }
   },
 
-  // Obtém um filme pelo ID
+  
+  // Obtém um filme global pelo ID
   getMovieById: async (movieId: number): Promise<Movie | null> => {
     try {
       const response = await api.get<Movie>(`/movies/${movieId}`);
@@ -33,8 +33,9 @@ export const movieService = {
     }
   },
 
+
   // Obtém filmes filtrados por status ("To Watch" ou "Watched")
-  getMoviesByStatus: async (
+  /* getMoviesByStatus: async (
     status: "To Watch" | "Watched",
   ): Promise<Movie[]> => {
     try {
@@ -44,9 +45,10 @@ export const movieService = {
       console.error("Error retrieving movies by status:", error);
       return [];
     }
-  },
+  }, */
 
-  // Adiciona um novo filme (precisa de autenticação)
+
+  // Adiciona um novo filme global (apenas isAdmin)
   addMovie: async (movie: Omit<Movie, "id">, token: string) => {
     try {
       const response = await api.post("/movies", movie, {
@@ -57,6 +59,7 @@ export const movieService = {
       console.error("Error adding movie:", error);
     }
   },
+
 
   // Atualiza um filme (apenas o usuário autenticado pode editar)
   updateMovie: async (
