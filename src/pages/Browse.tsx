@@ -1,64 +1,84 @@
-import { useEffect, useState } from "react";
-import { movieService } from "../services/movieService";
-import { authService } from "../services/authService"; // Para obter o token do usuário
+import { useEffect, useState, useContext } from "react";
+import { userMovieService } from "../services/userMovieService";
+import { SessionContext } from "../SessionContext/SessionContext";
+import { Button } from "flowbite-react";
+import { Movie, movieService } from "../services/movieService";
 
-interface Movie {
+interface UserMovie {
   id: number;
-  title: string;
-  genre: string;
+  movieId: number;
   status: "To Watch" | "Watched";
   rating?: number;
-  userId: number;
+  movie: {
+    id: number;
+    title: string;
+    genre: string;
+  };
 }
 
 const Browse = () => {
-  const [movies, setMovies] = useState<Movie[]>([]);
+  const { token, tokenPayload } = useContext(SessionContext) ?? {};
+  const [movies, setMovies] = useState<UserMovie[]>([]);
   const [filter, setFilter] = useState<"All" | "To Watch" | "Watched">("All");
 
-  const token = authService.getToken(); // Obtém o token do usuário autenticado
+  const userId: number | undefined = tokenPayload?.id;
 
   useEffect(() => {
-    async function fetchMovies() {
+    async function fetchUserMovies() {
+      if (!token || !userId) return;
+
       try {
-        let moviesData: Movie[] = [];
-        if (filter === "All") {
-          moviesData = await movieService.getMovies();
-        } else {
-          moviesData = await movieService.getMoviesByStatus(filter);
+        let moviesData = await userMovieService.getUserWatchlist(userId, token);
+        if (filter !== "All") {
+          moviesData = moviesData.filter((m) => m.status === filter);
         }
         setMovies(moviesData);
       } catch (error) {
-        console.error("Error when searching for movies:", error);
+        console.error("Error fetching watchlist:", error);
       }
     }
-    fetchMovies();
-  }, [filter]); // Atualiza a lista ao mudar o filtro
+    
+    fetchUserMovies();
+  }, [filter, token, tokenPayload?.id]); 
 
-  const handleDelete = async (id: number) => {
-    if (!token) {
-      alert("You need to be logged in to delete a movie.");
-      return;
-    }
+  // Alterna entre "To Watch" e "Watched"
+  const handleUpdateStatus = async (movieId: number, currentStatus: "To Watch" | "Watched") => {
+    if (!token) return;
+
+    const newStatus = currentStatus === "To Watch" ? "Watched" : "To Watch";
+
     try {
-      await movieService.deleteMovie(id, token);
-      setMovies(movies.filter((movie) => movie.id !== id));
+      await userMovieService.updateMovieStatus(movieId, newStatus, token);
+      setMovies(movies.map((movie) => 
+        movie.movieId === movieId ? { ...movie, status: newStatus } : movie
+      ));
     } catch (error) {
-      console.error("Error deleting movie:", error);
+      console.error("Error updating movie status:", error);
+    }
+  };
+
+  // Remove um filme da watchlist
+  const handleRemoveMovie = async (movieId: number) => {
+    if (!token) return;
+
+    try {
+      await userMovieService.removeFromWatchlist(movieId, token);
+      setMovies(movies.filter((movie) => movie.movieId !== movieId));
+    } catch (error) {
+      console.error("Error removing movie from watchlist:", error);
     }
   };
 
   return (
-    <div className="p-4">
-      <h1 className="text-xl font-bold">🎬 My Movie List</h1>
+    <div className="p-4 max-w-6xl mx-auto">
+      <h1 className="text-2xl font-bold text-gray-900 mb-4">🎬 My Watchlist</h1>
 
       {/* Filtro por status */}
       <div className="mb-4">
-        <label className="mr-2 font-semibold">Filtered by:</label>
+        <label className="mr-2 font-semibold">Filter by:</label>
         <select
           value={filter}
-          onChange={(e) =>
-            setFilter(e.target.value as "All" | "To Watch" | "Watched")
-          }
+          onChange={(e) => setFilter(e.target.value as "All" | "To Watch" | "Watched")}
           className="rounded border p-2"
         >
           <option value="All">All</option>
@@ -69,24 +89,21 @@ const Browse = () => {
 
       <ul className="mt-4">
         {movies.length === 0 ? (
-          <p>No movie found</p>
+          <p>No movies found in your watchlist.</p>
         ) : (
-          movies.map((movie) => (
-            <li
-              key={movie.id}
-              className="flex items-center justify-between border-b p-2"
-            >
+          movies.map((userMovie) => (
+            <li key={userMovie.movie.id} className="flex items-center justify-between border-b p-2">
               <div>
-                <strong>{movie.title}</strong> - {movie.genre} - {movie.status}
+                <strong>{userMovie.movie.title}</strong> - {userMovie.movie.genre} - {userMovie.status}
               </div>
-              {token && (
-                <button
-                  onClick={() => handleDelete(movie.id)}
-                  className="rounded bg-red-500 px-2 py-1 text-white hover:bg-red-700"
-                >
-                  🗑️ Delete
-                </button>
-              )}
+              <div className="flex gap-2">
+                <Button onClick={() => handleUpdateStatus(userMovie.movieId, userMovie.status)} color="blue">
+                  {userMovie.status === "To Watch" ? "Mark as Watched" : "Mark as To Watch"}
+                </Button>
+                <Button onClick={() => handleRemoveMovie(userMovie.movieId)} color="red">
+                  🗑️ Remove
+                </Button>
+              </div>
             </li>
           ))
         )}
@@ -96,13 +113,3 @@ const Browse = () => {
 };
 
 export default Browse;
-
-{
-  /* <ul>
-        {movies.map((movie) => (
-          <li key={movie.id} className="mt-2 p-2 bg-gray-100 rounded">
-            {movie.title} - {movie.watched ? "Watched" : "To Watch"}
-          </li>
-        ))}
-      </ul> */
-}

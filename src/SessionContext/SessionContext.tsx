@@ -35,7 +35,7 @@ const SessionContextProvider = ({ children }: SessionContextProviderProps): JSX.
   // Verifica se o token é válido
   const verifyToken = async (tokenToVerify: string): Promise<void> => {
     try {
-      const response = await api.get("/auth/verify", {
+      const response = await api.get("../auth/verify", {
         headers: { Authorization: `Bearer ${tokenToVerify}` },
       });
 
@@ -61,7 +61,7 @@ const SessionContextProvider = ({ children }: SessionContextProviderProps): JSX.
 
 
   useEffect(() => {
-    const storageToken = localStorage.getItem("authToken");
+    const storageToken = localStorage.getItem("token");
 
     if (storageToken) {
       verifyToken(storageToken);
@@ -73,7 +73,7 @@ const SessionContextProvider = ({ children }: SessionContextProviderProps): JSX.
   
   useEffect(() => {
     if (token) {
-      localStorage.setItem("authToken", token);
+      localStorage.setItem("token", token);
     } else {
       localStorage.removeItem("authToken");
     }

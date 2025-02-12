@@ -1,7 +1,7 @@
 import api from "./api";
 /* import { movieStatusService } from "./movieStatusService"; */
 
-interface Movie {
+export interface Movie {
   id: number;
   title: string;
   genre: string;
