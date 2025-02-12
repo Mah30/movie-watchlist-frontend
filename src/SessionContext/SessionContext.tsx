@@ -1,11 +1,19 @@
 import { createContext, useEffect, useState, ReactNode } from "react";
 import api from "../services/api"; 
 
+
+
 // Define a estrutura do contexto de autenticação
+
+interface TokenPayload {
+  id: number;
+  isAdmin: boolean;
+}
+
 interface SessionContextType {
   token: string | null;
   setToken: (token: string) => void;
-  tokenPayload: Record<string, unknown>;
+  tokenPayload: TokenPayload | null; /* tokenPayload: Record<string, unknown>; */
   isAuthenticated: boolean;
   isLoading: boolean;
   logout: () => void;
@@ -20,7 +28,7 @@ interface SessionContextProviderProps {
 
 const SessionContextProvider = ({ children }: SessionContextProviderProps): JSX.Element => {
   const [token, setToken] = useState<string | null>(null);
-  const [tokenPayload, setTokenPayload] = useState<Record<string, unknown>>({});
+  const [tokenPayload, setTokenPayload] = useState<TokenPayload | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -76,7 +84,7 @@ const SessionContextProvider = ({ children }: SessionContextProviderProps): JSX.
   // Função de logout
   const logout = (): void => {
     setToken(null);
-    setTokenPayload({});
+    setTokenPayload(null);
     setIsAuthenticated(false);
     localStorage.removeItem("authToken");
   };
