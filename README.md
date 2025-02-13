@@ -1,3 +1,87 @@
+# 🎬 Movie Watchlist - Frontend
+
+**Movie Watchlist** is a web application that allows users to manage their personal movie watchlist, mark movies as watched, and browse available movies from a global catalog.
+
+## 🚀 Technologies Used
+
+- **React.js** + **TypeScript**
+- **Vite**
+- **Axios** for API communication
+- **Flowbite React** for UI components
+- **Context API** for authentication and session management
+- **React Router** for navigation
+
+---
+
+## 📂 **Project Structure**
+
+movie-watchlist-frontend/
+│-- node_modules/               
+│-- public/                     
+│-- src/                         
+│   │-- components/              
+│   │   ├── MovieCard.tsx
+│   │   ├── MovieForm.tsx
+│   │   ├── Navbar.tsx
+│   │-- pages/                   
+│   │   ├── AboutPage.tsx
+│   │   ├── Browse.tsx
+│   │   ├── HomePage.tsx
+│   │   ├── Login.tsx
+│   │   ├── MoviesPage.tsx
+│   │   ├── Profile.tsx
+│   │   ├── Signup.tsx
+│   │   ├── UserWatchlistPage.tsx
+│   │   ├── WatchlistPage.tsx
+│   │-- routes/                  
+│   │   ├── AnonymousRoute.tsx
+│   │   ├── PrivateRoute.tsx
+│   │-- services/                
+│   │   ├── api.ts
+│   │   ├── authService.ts
+│   │   ├── movieService.ts
+│   │   ├── movieStatusService.ts
+│   │   ├── userMovieService.ts
+│   │-- SessionContext/          
+│   │   ├── SessionContext.tsx
+│   ├── App.tsx                  
+│   ├── global.d.ts              
+│   ├── index.css               
+│   ├── main.tsx                 
+│   ├── Signup.tsx               
+│   ├── vite-env.d.ts            
+│-- .env                        
+│-- .eslintrc.cjs                
+│-- .gitignore                   
+│-- package.json                 
+│-- tsconfig.json                
+│-- tsconfig.node.json  
+│-- vite.config.ts  
+
+
+## 📌 **Key Features**
+✔ User registration and login  
+✔ Add/remove movies from the watchlist  
+✔ Filter movies by status ("To Watch" or "Watched")  
+✔ Only admins can add movies to the global catalog  
+✔ API communication using Axios  
+
+---
+
+
+## 🌍 **Deployment**
+The project is available online at:  
+🔗 **Frontend:** `[]`  
+
+---
+
+## 📜 **License**
+This project was developed for educational and learning purposes. 🚀🎬
+
+***
+
+
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
