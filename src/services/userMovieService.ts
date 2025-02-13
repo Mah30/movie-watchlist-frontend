@@ -28,16 +28,20 @@ export const userMovieService = {
   },
 
   // Adiciona um filme à watchlist do usuário autenticado (CREATE)
-  addToWatchlist: async (movieId: number, token: string) => {
+  addToWatchlist: async (movieId: number, token: string): Promise<boolean> => {
     try {
       const response = await api.post(
         "/user-movies",
         { movieId },
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      return response.data;
+      if (response.status === 400) {
+        return false;
+      }
+      return true;
     } catch (error) {
       console.error("Error adding movie to watchlist:", error);
+      return false;
     }
   },
 

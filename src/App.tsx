@@ -24,7 +24,7 @@ function App() {
 
   return (
     <main>
-      <div className="pt-20">
+      <div className="pt-16">
         <Navbar />
 
         <Routes>
@@ -32,7 +32,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
           {/* Rota Protegida - apenas usuários logados podem acessar */}
-          {/* <Route path="/browse" element={<Browse /> } /> */}
+        
           {/*  <Route path="/browse" element={authService.isAuthenticated() ? <Browse /> : <Navigate to="/login" />} /> */}{" "}
           {/* Botar esse código dentro de browse */}
           {/*   <Route path="/addmovie" element={<MovieForm />} />  */}
