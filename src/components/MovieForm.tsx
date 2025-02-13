@@ -6,7 +6,6 @@ import { SessionContext } from "../SessionContext/SessionContext";
 const MovieForm = ({ onMovieAdded }: { onMovieAdded: () => void }) => {
   const [title, setTitle] = useState("");
   const [genre, setGenre] = useState("");
-  const [status, setStatus] = useState<"Watched" | "To Watch">("To Watch");
 
   const session = useContext(SessionContext);
   const token = session?.token;
@@ -17,7 +16,7 @@ const MovieForm = ({ onMovieAdded }: { onMovieAdded: () => void }) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await movieService.addMovie({ title, genre, status, userId: 1 }, token);
+    await movieService.addMovie({ title, genre }, token);
     onMovieAdded();
     setTitle("");
     setGenre("");
@@ -39,13 +38,6 @@ const MovieForm = ({ onMovieAdded }: { onMovieAdded: () => void }) => {
         onChange={(e) => setGenre(e.target.value)}
         required
       />
-      <select
-        value={status}
-        onChange={(e) => setStatus(e.target.value as "To Watch" | "Watched")}
-      >
-        <option value="To Watch">To Watch</option>
-        <option value="Watched">Watched</option>
-      </select>
       <button type="submit">Add Movie</button>
     </form>
   );

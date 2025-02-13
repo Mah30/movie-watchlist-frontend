@@ -1,4 +1,6 @@
-module.exports = {
+import tailwinPlugin from "prettier-plugin-tailwindcss";
+
+export default {
   root: true,
   env: { browser: true, es2020: true },
   extends: [
@@ -10,7 +12,7 @@ module.exports = {
   ],
   ignorePatterns: ["dist", ".eslintrc.cjs"],
   parser: "@typescript-eslint/parser",
-  plugins: ["react-refresh", require("prettier-plugin-tailwindcss")],
+  plugins: ["react-refresh", tailwinPlugin],
   settings: {
     tailwindcss: {
       callees: ["twMerge", "createTheme"],

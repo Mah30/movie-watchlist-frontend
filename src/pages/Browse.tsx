@@ -2,7 +2,6 @@ import { useEffect, useState, useContext } from "react";
 import { userMovieService } from "../services/userMovieService";
 import { SessionContext } from "../SessionContext/SessionContext";
 import { Button } from "flowbite-react";
-import { Movie, movieService } from "../services/movieService";
 
 interface UserMovie {
   id: number;
