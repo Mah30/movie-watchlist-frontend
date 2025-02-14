@@ -1,21 +1,23 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { authService } from "../services/authService";
 import { useState } from "react";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const location = useLocation(); 
 
   return (
     <nav className="fixed start-0 top-0 z-20 w-full border-b border-gray-700 bg-gray-900">
       <div className="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between p-4">
+
         {/* Logo */}
         <Link to="/" className="flex items-center space-x-3">
-          <img src="/logo.jpg" className="h-8" alt="Logo" />
+          <img src="/logo.jpg" className="h-16" alt="Logo" />
           <span className="self-center whitespace-nowrap text-2xl font-semibold text-white">
             Movie Watchlist
           </span>
         </Link>
-  
+
         {/* Mobile Menu Toggle Button */}
         <div className="flex space-x-4 md:order-2">
           {authService.isAuthenticated() ? (
@@ -45,7 +47,7 @@ const Navbar = () => {
               </Link>
             </>
           )}
-  
+
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -71,7 +73,7 @@ const Navbar = () => {
             </svg>
           </button>
         </div>
-  
+
         {/* Navigation Links */}
         <div
           className={`${
@@ -84,19 +86,26 @@ const Navbar = () => {
               <li>
                 <Link
                   to="/browse"
-                  className="block rounded-md px-4 py-2 text-sm font-medium transition-all duration-300 hover:bg-gray-700 hover:text-white md:bg-transparent md:hover:bg-transparent md:hover:text-red-500"
-                  aria-current="page"
+                  className={`block rounded-md px-4 py-2 text-sm font-medium transition-all duration-300 ${
+                    location.pathname === "/browse"
+                      ? "text-red-500 font-semibold"
+                      : "hover:bg-gray-700 hover:text-white md:bg-transparent md:hover:bg-transparent md:hover:text-red-500"
+                  }`}
                 >
                   My Movie List
                 </Link>
               </li>
             )}
-  
+
             {authService.isAuthenticated() && (
               <li>
                 <Link
                   to="/profile"
-                  className="block rounded-md px-4 py-2 text-sm font-medium transition-all duration-300 hover:bg-gray-700 hover:text-white md:bg-transparent md:hover:bg-transparent md:hover:text-red-500"
+                  className={`block rounded-md px-4 py-2 text-sm font-medium transition-all duration-300 ${
+                    location.pathname === "/profile"
+                      ? "text-red-500 font-semibold"
+                      : "hover:bg-gray-700 hover:text-white md:bg-transparent md:hover:bg-transparent md:hover:text-red-500"
+                  }`}
                 >
                   Profile
                 </Link>
@@ -110,3 +119,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+

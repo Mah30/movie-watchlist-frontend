@@ -69,46 +69,73 @@ const Browse = () => {
   };
 
   return (
-    <div className="p-4 max-w-6xl mx-auto">
-      <h1 className="text-2xl font-bold text-gray-900 mb-4">🎬 My Watchlist</h1>
+    <div className="relative min-h-screen">
+      {/* Imagem de fundo fixa */}
+      <div
+        className="fixed inset-0 w-full h-full z-[-1]"
+        style={{
+          backgroundImage: "url('/movie-background.jpg')", // Caminho correto da imagem
+          backgroundSize: "1800px 100%", /* cover */
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          opacity: 0.4, // Ajuste para um fundo sutil
+        }}
+      ></div>
+  
+      {/* Conteúdo principal */}
+      <div className="p-6 max-w-6xl mx-auto text-white relative z-10">
+        <h1 className="text-3xl font-bold mb-6 text-gray-800">🎬 My Watchlist</h1>
+  
+        {/* Filtro por status */}
+        <div className="mb-6 flex items-center gap-4">
+          <label className="font-semibold text-gray-800">Filter by:</label>
+          <select
+            value={filter}
+            onChange={(e) => setFilter(e.target.value as "All" | "To Watch" | "Watched")}
+            className="rounded-lg border border-gray-600 bg-gray-800 p-2 text-white"
+          >
+            <option value="All">All</option>
+            <option value="To Watch">To Watch</option>
+            <option value="Watched">Watched</option>
+          </select>
+        </div>
+  
+        <ul className="mt-4 space-y-4">
+          {movies.length === 0 ? (
+            <p className="text-gray-400">No movies found in your watchlist.</p>
+          ) : (
+            movies.map((userMovie) => (
+              <li
+                key={userMovie.movie.id}
+                className="flex flex-col md:flex-row items-center justify-between bg-gray-800 p-4 rounded-lg shadow-md border border-gray-700"
+              >
+                <div className="text-lg">
+                  <strong>{userMovie.movie.title}</strong> - {userMovie.movie.genre} - <span className="text-gray-400">{userMovie.status}</span>
+                </div>
+                <div className="flex gap-4 mt-2 md:mt-0">
+                  <Button
+                    onClick={() => handleUpdateStatus(userMovie.movieId, userMovie.status)}
+                    className="rounded-lg bg-teal-600 px-5 py-2 text-sm font-medium text-white shadow-md transition-all duration-300 hover:bg-green-900 focus:outline-none focus:ring-2 focus:ring-blue-300"
 
-      {/* Filtro por status */}
-      <div className="mb-4">
-        <label className="mr-2 font-semibold">Filter by:</label>
-        <select
-          value={filter}
-          onChange={(e) => setFilter(e.target.value as "All" | "To Watch" | "Watched")}
-          className="rounded border p-2"
-        >
-          <option value="All">All</option>
-          <option value="To Watch">To Watch</option>
-          <option value="Watched">Watched</option>
-        </select>
+                   /*  "rounded-lg bg-teal-600 px-5 py-2 text-sm font-medium text-white shadow-md transition-all duration-300 hover:bg-green-900 focus:outline-none focus:ring-2 focus:ring-green-200" */
+                  >
+                    {userMovie.status === "To Watch" ? "Mark as Watched" : "Mark as To Watch"}
+                  </Button>
+                  <Button
+                    onClick={() => handleRemoveMovie(userMovie.movieId)}
+                    className="rounded-lg bg-red-600 px-5 py-2 text-sm font-medium text-white shadow-md transition-all duration-300 hover:bg-red-900 focus:outline-none focus:ring-2 focus:ring-red-300"
+                  >
+                    🗑️ Remove
+                  </Button>
+                </div>
+              </li>
+            ))
+          )}
+        </ul>
       </div>
-
-      <ul className="mt-4">
-        {movies.length === 0 ? (
-          <p>No movies found in your watchlist.</p>
-        ) : (
-          movies.map((userMovie) => (
-            <li key={userMovie.movie.id} className="flex items-center justify-between border-b p-2">
-              <div>
-                <strong>{userMovie.movie.title}</strong> - {userMovie.movie.genre} - {userMovie.status}
-              </div>
-              <div className="flex gap-2">
-                <Button onClick={() => handleUpdateStatus(userMovie.movieId, userMovie.status)} color="blue">
-                  {userMovie.status === "To Watch" ? "Mark as Watched" : "Mark as To Watch"}
-                </Button>
-                <Button onClick={() => handleRemoveMovie(userMovie.movieId)} color="red">
-                  🗑️ Remove
-                </Button>
-              </div>
-            </li>
-          ))
-        )}
-      </ul>
     </div>
   );
+  
 };
 
 export default Browse;
