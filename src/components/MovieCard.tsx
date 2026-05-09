@@ -43,7 +43,7 @@ const MovieCard = ({ movie, onStatusUpdated }: MovieCardProps) => {
   };
 
   return (
-    <div className="movie-card">
+    <div>
       <h3>{movie.movie.title}</h3>
       <p>{movie.movie.genre}</p>
       <p>Status: {movie.status}</p>
