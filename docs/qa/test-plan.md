@@ -1,4 +1,4 @@
-Test Plan - Movie Watchlist Frontend
+# Test Plan - Movie Watchlist Frontend
 
 ## Objectiv
 
