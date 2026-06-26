@@ -24,6 +24,7 @@ dist-ssr
 *.sln
 *.sw?
 
+
 # Logs
 *.log
 npm-debug.log*
@@ -37,3 +38,11 @@ coverage/
 # Prisma local databases
 *.db
 *.db-journal
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/
+
