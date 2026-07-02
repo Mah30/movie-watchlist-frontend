@@ -17,9 +17,9 @@ test("guest can navigate from home page to login page", async ({ page }) => {
   // Checks that the browser navigated to the login page and that the login form is displayed.
   await expect(page).toHaveURL(/\/login$/);
   await expect(page.getByRole("heading", {name: "Log in"})).toBeVisible();
-  await expect(page.getByLabel("Email")).toBeVisible();
+  await expect(page.getByLabel("email")).toBeVisible();
   await expect(page.getByLabel("password")).toBeVisible();
-  await expect(page.getByRole("button", {name: ""})).toBeVisible();
+  await expect(page.getByRole("button", {name: /sign in/i})).toBeVisible();
 });
 
 
