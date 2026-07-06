@@ -1,7 +1,7 @@
 
 import { expect, test } from '@playwright/test';
 
-test( "gest can navigate from signup page back to login page", async({ page }) => {
+test( "guest can navigate from signup page back to login page", async({ page }) => {
     await page.goto("/signup");
     await expect(page).toHaveURL(/\/signup$/)
 
@@ -11,6 +11,11 @@ test( "gest can navigate from signup page back to login page", async({ page }) =
 
     await expect(page.getByRole("link", {name: /already have an account\? log in/i })).toBeVisible()
     await page.getByRole("link", {name: /already have an account\? log in/i }).click();
+
+
+    
+    await expect(page).toHaveURL(/\/login$/);
+    await expect(page.getByRole("heading", { name: "Log In" })).toBeVisible();
 
 
 })
