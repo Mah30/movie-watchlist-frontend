@@ -10,6 +10,8 @@
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:headed": "playwright test --headed",
     "test:e2e:report": "playwright show-report",
+    "test:auth-nav": "playwright test tests/auth-navigation.spec.ts",
+    "test:login-aut": "playwright test tests/login-authentication.spec.ts",
     "preview": "vite preview",
     "format": "prettier . --write",
     "format:check": "prettier . --check",
@@ -22,8 +24,8 @@
     "flowbite-react": "^0.8.0",
     "framer-motion": "^12.4.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-router-dom": "^7.1.5"
+    "react-dom": "^18.3.1",
+    "react-router-dom": "7.18.2"
   },
   "devDependencies": {
     "@playwright/test": "^1.61.1",
@@ -32,8 +34,8 @@
     "@types/react": "^18.2.67",
     "@types/react-dom": "^18.2.22",
     "@types/react-router-dom": "^5.3.3",
-    "@typescript-eslint/eslint-plugin": "^7.3.1",
-    "@typescript-eslint/parser": "^7.3.1",
+    "@typescript-eslint/eslint-plugin": "^8.65.0",
+    "@typescript-eslint/parser": "^8.65.0",
     "@vitejs/plugin-react": "^4.2.1",
     "autoprefixer": "^10.4.20",
     "eslint": "^8.57.0",
